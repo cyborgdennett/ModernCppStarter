@@ -1,5 +1,5 @@
-#include <greeter/greeter.h>
-#include <greeter/version.h>
+#include <airportsim/airportsim.h>
+#include <airportsim/version.h>
 
 #include <cxxopts.hpp>
 #include <iostream>
@@ -7,11 +7,17 @@
 #include <unordered_map>
 
 auto main(int argc, char** argv) -> int {
-  const std::unordered_map<std::string, greeter::LanguageCode> languages{
-      {"en", greeter::LanguageCode::EN},
-      {"de", greeter::LanguageCode::DE},
-      {"es", greeter::LanguageCode::ES},
-      {"fr", greeter::LanguageCode::FR},
+  const std::unordered_map<std::string, int> examples{
+      {"cxxopts", 1},
+      {"fmt", 2},
+      {"spdlog", 3},
+  };
+
+  const std::unordered_map<std::string, airportsim::LanguageCode> languages{
+      {"en", airportsim::LanguageCode::EN},
+      {"de", airportsim::LanguageCode::DE},
+      {"es", airportsim::LanguageCode::ES},
+      {"fr", airportsim::LanguageCode::FR},
   };
 
   cxxopts::Options options(*argv, "A program to welcome the world!");
@@ -36,7 +42,7 @@ auto main(int argc, char** argv) -> int {
   }
 
   if (result["version"].as<bool>()) {
-    std::cout << "Greeter, version " << GREETER_VERSION << std::endl;
+    std::cout << "AirportSim, version " << AIRPORTSIM_VERSION << std::endl;
     return 0;
   }
 
@@ -46,8 +52,8 @@ auto main(int argc, char** argv) -> int {
     return 1;
   }
 
-  greeter::Greeter greeter(name);
-  std::cout << greeter.greet(langIt->second) << std::endl;
+  airportsim::AirportSim airportsim(name);
+  std::cout << airportsim.greet(langIt->second) << std::endl;
 
   return 0;
 }
